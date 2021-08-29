@@ -83,10 +83,10 @@ function initElectron(){
 
   const {log, info, error} = console;
 
-  console.log = (...args) => {
-    log(...args);
-    ipc.send('log', args);
-  };
+  // console.log = (...args) => {
+  //   log(...args);
+  //   ipc.send('log', args);
+  // };
 
   console.info = (...args) => {
     info(...args);
