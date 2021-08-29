@@ -1,0 +1,27 @@
+type ( ⟹ ) 2 [infixr 25]
+type bool  0
+
+const (∀)   [binder]    :: ('a  ⟹  bool)  ⟹  bool
+const (THE) [binder]    :: ('a  ⟹  bool)  ⟹  'a
+const ( ⟶ ) [infixr 25] :: bool  ⟹  bool  ⟹  bool
+const (=)   [infixl 50] :: 'a  ⟹  'a  ⟹  bool
+
+meta bool   bool
+meta arrow  ( ⟹ )
+meta lambda (λ)
+meta uni    (∀)
+meta imp    ( ⟶ )
+meta eq     (=)
+
+axiom refl: ∀a. a = a
+axiom sub:  ∀P a b. a = b  ⟶  P a  ⟶  P b
+
+lemma psub: ∀P Q. P = Q  ⟶  P  ⟶  Q
+  - sub[λx. x] 1 2 %
+
+lemma eq_com: ∀a b. a = b  ⟶  b = a
+  - sub[λx. x = a] 1 refl %
+
+lemma eq_tran: ∀a c b. a = b  ⟶  b = c  ⟶  a = c
+  - eq_com 1*
+  - sub[λx. x = b] 1 2 %
